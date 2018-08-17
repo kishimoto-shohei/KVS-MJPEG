@@ -16,20 +16,22 @@ public class OpenCVDemo {
     private static String user;
     private static String pass;
     private static String streamName;
+    private static String region;
 
     public static void main(final String[] args) {
 
         try {
-            if(args.length == 4){
+            if(args.length == 5){
                 videoSrc = args[0];
                 user = args[1];
                 pass = args[2];
                 streamName = args[3];
+                region = args[4];
             }
 
             KinesisVideoClient kinesisVideoClient = KinesisVideoJavaClientFactory
                     .createKinesisVideoClient(
-                            Regions.US_WEST_2,
+                            Regions.fromName(region),
                             new SystemPropertiesCredentialsProvider());
 
             MediaSource openCVMediaSource = createOpenCVMediaSource(videoSrc,user,pass);

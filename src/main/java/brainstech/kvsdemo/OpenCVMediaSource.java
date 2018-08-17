@@ -15,10 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.annotation.Nonnull;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
-import static com.amazonaws.kinesisvideo.producer.StreamInfo.NalAdaptationFlags.NAL_ADAPTATION_FLAG_NONE;
 import static com.amazonaws.kinesisvideo.producer.Time.HUNDREDS_OF_NANOS_IN_A_MILLISECOND;
 import static com.amazonaws.kinesisvideo.producer.Time.HUNDREDS_OF_NANOS_IN_A_SECOND;
 import static com.amazonaws.kinesisvideo.util.StreamInfoConstants.*;
