@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" != 2 ]; then
+if [ "$#" != 6 ]; then
  echo " Usage: ./run-java-demoapp.sh access_key secret_key "
  exit
 fi
