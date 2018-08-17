@@ -21,10 +21,10 @@ public class OpenCVDemo {
 
         try {
             if(args.length == 4){
-                videoSrc = args[1];
-                user = args[2];
-                pass = args[3];
-                streamName = args[4];
+                videoSrc = args[0];
+                user = args[1];
+                pass = args[2];
+                streamName = args[3];
             }
 
             KinesisVideoClient kinesisVideoClient = KinesisVideoJavaClientFactory
