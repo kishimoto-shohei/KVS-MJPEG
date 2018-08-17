@@ -7,19 +7,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Base64;
 import java.util.concurrent.TimeUnit;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.EOFException;
-import javax.imageio.ImageIO;
 
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameConverter;
 import org.bytedeco.javacv.FrameGrabber;
 
 import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.javacpp.Loader;
 import org.bytedeco.javacpp.opencv_core;
-import org.bytedeco.javacpp.opencv_highgui;
 import org.bytedeco.javacpp.opencv_imgcodecs;
 import org.bytedeco.javacpp.opencv_core.CvMat;
 import org.bytedeco.javacpp.opencv_core.IplImage;
@@ -105,7 +100,6 @@ public class IPCameraAuthFrameGrabber extends FrameGrabber {
                 this.releaseDecoded();
             }
         }
-
     }
 
     public void trigger() {
@@ -120,11 +114,6 @@ public class IPCameraAuthFrameGrabber extends FrameGrabber {
         } catch (IOException var3) {
             throw new Exception(var3.getMessage(), var3);
         }
-    }
-
-    public BufferedImage grabBufferedImage() throws IOException {
-        BufferedImage bi = ImageIO.read(new ByteArrayInputStream(this.readImage()));
-        return bi;
     }
 
     private void releaseDecoded() {

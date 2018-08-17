@@ -38,13 +38,15 @@ public class OpenCVMediaSource implements MediaSource {
     private int frameIndex;
 
     private final Log log = LogFactory.getLog(OpenCVMediaSource.class);
-    // CHECKSTYLE:SUPPRESS:LineLength
+
     private static final byte[] AVCC_EXTRA_DATA = {
             (byte) 0x01,
             (byte) 0x64, (byte) 0x00, (byte) 0x28,
             (byte) 0xff, (byte) 0xe1, (byte) 0x00,
             (byte) 0x0e,
-            (byte) 0x27, (byte) 0x64, (byte) 0x00, (byte) 0x28, (byte) 0xac, (byte) 0x2b, (byte) 0x40, (byte) 0x50, (byte) 0x1e, (byte) 0xd0, (byte) 0x0f, (byte) 0x12, (byte) 0x26, (byte) 0xa0, (byte) 0x01, (byte) 0x00, (byte) 0x04, (byte) 0x28, (byte) 0xee, (byte) 0x1f, (byte) 0x2c};
+            (byte) 0x27, (byte) 0x64, (byte) 0x00, (byte) 0x28, (byte) 0xac, (byte) 0x2b, (byte) 0x40, (byte) 0x50,
+            (byte) 0x1e, (byte) 0xd0, (byte) 0x0f, (byte) 0x12, (byte) 0x26, (byte) 0xa0, (byte) 0x01, (byte) 0x00,
+            (byte) 0x04, (byte) 0x28, (byte) 0xee, (byte) 0x1f, (byte) 0x2c};
 
     @Override
     public MediaSourceState getMediaSourceState() {
@@ -158,7 +160,7 @@ public class OpenCVMediaSource implements MediaSource {
                 "V_MPEG4/ISO/AVC",
                 "we-did-it",
                 DEFAULT_BITRATE,
-                5,
+                FRAME_RATE_25,
                 DEFAULT_BUFFER_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
                 DEFAULT_REPLAY_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
                 DEFAULT_STALENESS_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
@@ -170,44 +172,4 @@ public class OpenCVMediaSource implements MediaSource {
                         new Tag("stream", "Test Stream") },
                 StreamInfo.NalAdaptationFlags.NAL_ADAPTATION_ANNEXB_NALS);
     }
-
-    public StreamInfo toStreamInfo(final String streamName) {
-        return new StreamInfo(VERSION_ZERO,
-                streamName,
-                StreamInfo.StreamingType.STREAMING_TYPE_REALTIME,
-                "video/h264",
-                NO_KMS_KEY_ID,
-                RETENTION_ONE_HOUR,
-                NOT_ADAPTIVE,
-                MAX_LATENCY_ZERO,
-                DEFAULT_GOP_DURATION * HUNDREDS_OF_NANOS_IN_A_MILLISECOND,
-                KEYFRAME_FRAGMENTATION,
-                USE_FRAME_TIMECODES,
-                RELATIVE_TIMECODES,
-                REQUEST_FRAGMENT_ACKS,
-                RECOVER_ON_FAILURE,
-                "V_MPEG4/ISO/AVC",
-                "we-did-it",
-                DEFAULT_BITRATE,
-                FRAME_RATE_25,
-                DEFAULT_BUFFER_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
-                DEFAULT_REPLAY_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
-                DEFAULT_STALENESS_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
-                DEFAULT_TIMESCALE,
-                RECALCULATE_METRICS,
-                AVCC_EXTRA_DATA,
-                getTags(),
-                /*
-                 * Here we have the CPD hardcoded in AVCC format already, hence no need to adapt NAL.
-                 */
-                StreamInfo.NalAdaptationFlags.NAL_ADAPTATION_ANNEXB_NALS);
-    }
-    private static Tag[] getTags() {
-        final List<Tag> tagList = new ArrayList<>();
-        tagList.add(new Tag("device", "Test Device"));
-        tagList.add(new Tag("stream", "Test Stream"));
-        return tagList.toArray(new Tag[0]);
-    }
-
-
 }

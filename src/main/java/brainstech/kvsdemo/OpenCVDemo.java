@@ -12,10 +12,10 @@ import com.amazonaws.regions.Regions;
 
 public class OpenCVDemo {
 
-    private static String videoSrc ="http://tccam.miemasu.net:7011/nphMotionJpeg";
-    private static String user = "nwcadmin";
-    private static String pass = "passwd34";
-    private static String streamName = "test";
+    private static String videoSrc;
+    private static String user;
+    private static String pass;
+    private static String streamName;
 
     public static void main(final String[] args) {
 
