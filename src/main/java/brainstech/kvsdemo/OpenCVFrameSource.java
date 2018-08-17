@@ -4,7 +4,6 @@ import com.amazonaws.kinesisvideo.mediasource.OnFrameDataAvailable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.Java2DFrameConverter;
@@ -18,7 +17,6 @@ import org.jcodec.common.model.*;
 import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
 
-import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.time.Duration;
@@ -87,9 +85,7 @@ public class OpenCVFrameSource {
 
     private void generateFrameAndNotifyListener() {
 
-        CanvasFrame canvas = new CanvasFrame("crane");
         Java2DFrameConverter converter = new Java2DFrameConverter();
-        canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         FrameGrabber grabber = null;
         try {
             grabber = new IPCameraAuthFrameGrabber(

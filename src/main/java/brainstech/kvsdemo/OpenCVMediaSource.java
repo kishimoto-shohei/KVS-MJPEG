@@ -17,7 +17,6 @@ import javax.annotation.Nonnull;
 import java.nio.ByteBuffer;
 
 import static com.amazonaws.kinesisvideo.producer.StreamInfo.NalAdaptationFlags.NAL_ADAPTATION_FLAG_NONE;
-import static com.amazonaws.kinesisvideo.producer.Time.HUNDREDS_OF_NANOS_IN_AN_HOUR;
 import static com.amazonaws.kinesisvideo.producer.Time.HUNDREDS_OF_NANOS_IN_A_MILLISECOND;
 import static com.amazonaws.kinesisvideo.producer.Time.HUNDREDS_OF_NANOS_IN_A_SECOND;
 import static com.amazonaws.kinesisvideo.util.StreamInfoConstants.*;
@@ -150,7 +149,7 @@ public class OpenCVMediaSource implements MediaSource {
                 null,
                 null,
                 DEFAULT_BITRATE,
-                FRAMERATE_30,
+                5,
                 DEFAULT_BUFFER_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
                 DEFAULT_REPLAY_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,
                 DEFAULT_STALENESS_DURATION_IN_SECONDS * HUNDREDS_OF_NANOS_IN_A_SECOND,

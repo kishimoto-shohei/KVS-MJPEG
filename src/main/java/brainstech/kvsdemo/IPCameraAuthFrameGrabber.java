@@ -1,9 +1,5 @@
 package brainstech.kvsdemo;
 
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.FrameConverter;
-import org.bytedeco.javacv.FrameGrabber;
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 import javax.imageio.ImageIO;
+
+import org.bytedeco.javacv.Frame;
+import org.bytedeco.javacv.FrameConverter;
+import org.bytedeco.javacv.FrameGrabber;
 
 import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.Loader;
@@ -32,7 +32,6 @@ import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
  */
 public class IPCameraAuthFrameGrabber extends FrameGrabber {
 
-    private static Exception loadingException = null;
     private final FrameConverter converter;
     private final URL url;
     private final int connectionTimeout;
@@ -42,18 +41,6 @@ public class IPCameraAuthFrameGrabber extends FrameGrabber {
     private DataInputStream input;
     private byte[] pixelBuffer;
     private IplImage decoded;
-
-    public static void tryLoad() throws Exception {
-        if (loadingException != null) {
-            throw loadingException;
-        } else {
-            try {
-                Loader.load(opencv_highgui.class);
-            } catch (Throwable var1) {
-                throw loadingException = new Exception("Failed to load " + org.bytedeco.javacv.IPCameraFrameGrabber.class, var1);
-            }
-        }
-    }
 
     public IPCameraAuthFrameGrabber(URL url,String user,String pass,int startTimeout, int grabTimeout, TimeUnit timeUnit) {
         this.converter = new ToIplImage();
@@ -76,9 +63,6 @@ public class IPCameraAuthFrameGrabber extends FrameGrabber {
         }
     }
 
-    public IPCameraAuthFrameGrabber(String urlstr,String user,String pass,int connectionTimeout, int readTimeout, TimeUnit timeUnit) throws MalformedURLException {
-        this(new URL(urlstr), user, pass, connectionTimeout, readTimeout, timeUnit);
-    }
 
     public IPCameraAuthFrameGrabber(String urlstr,String user,String  pass) throws MalformedURLException {
         this(new URL(urlstr), user, pass, -1, -1, null);

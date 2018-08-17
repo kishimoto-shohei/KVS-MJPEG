@@ -16,24 +16,26 @@ public class OpenCVDemo {
     private static String user = "nwcadmin";
     private static String pass = "passwd34";
     private static String streamName = "test";
-    private static boolean run = true;
 
     public static void main(final String[] args) {
+
         try {
-            // create Kinesis Video high level client
-            final KinesisVideoClient kinesisVideoClient = KinesisVideoJavaClientFactory
+            if(args.length == 4){
+                videoSrc = args[1];
+                user = args[2];
+                pass = args[3];
+                streamName = args[4];
+            }
+
+            KinesisVideoClient kinesisVideoClient = KinesisVideoJavaClientFactory
                     .createKinesisVideoClient(
                             Regions.US_WEST_2,
                             new SystemPropertiesCredentialsProvider());
 
-            // create a media source. this class produces the data and pushes it into
-            // Kinesis Video Producer lower level components
-            final MediaSource openCVMediaSource = createOpenCVMediaSource(videoSrc,user,pass);
+            MediaSource openCVMediaSource = createOpenCVMediaSource(videoSrc,user,pass);
 
-            // register media source with Kinesis Video Client
             kinesisVideoClient.registerMediaSource(streamName, openCVMediaSource);
 
-            // start streaming
             openCVMediaSource.start();
 
         } catch (final KinesisVideoException e) {
@@ -43,14 +45,15 @@ public class OpenCVDemo {
 
     private static MediaSource createOpenCVMediaSource(String videoSrc,String user,String pass) {
 
-        final MediaSourceConfiguration configuration =
+        MediaSourceConfiguration configuration =
                 new OpenCVMediaSourceConfiguration.Builder()
                         .fps(5)
                         .videoSrc(videoSrc)
                         .user(user)
                         .pass(pass)
                         .build();
-        final OpenCVMediaSource mediaSource = new OpenCVMediaSource();
+
+        OpenCVMediaSource mediaSource = new OpenCVMediaSource();
         mediaSource.configure(configuration);
 
         return mediaSource;
