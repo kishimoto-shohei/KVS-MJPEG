@@ -16,7 +16,7 @@ public class OpenCVDemo {
     private static String user ;
     private static String pass ;
     private static String streamName ;
-    private staitc String region = "us-west-1";
+    private static String region = "us-west-1";
     private static int fps = 5;
 
     public static void main(final String[] args) {
