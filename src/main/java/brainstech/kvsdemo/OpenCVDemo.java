@@ -26,9 +26,9 @@ public class OpenCVDemo {
             user = args[1];
             pass = args[2];
             streamName = args[3];
-            if(args.length >= 4){
+            if(args.length > 4){
                 region = args[4];
-                if(args.length >=5){
+                if(args.length > 5){
                     fps = Integer.parseInt(args[5]);
                 }
             }
