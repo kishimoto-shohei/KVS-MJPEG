@@ -12,29 +12,34 @@ import com.amazonaws.regions.Regions;
 
 public class OpenCVDemo {
 
-    private static String videoSrc;
-    private static String user;
-    private static String pass;
-    private static String streamName;
-    private static String region;
+    private static String videoSrc ;
+    private static String user ;
+    private static String pass ;
+    private static String streamName ;
+    private staitc String region = "us-west-1";
+    private static int fps = 5;
 
     public static void main(final String[] args) {
 
         try {
-            if(args.length == 5){
-                videoSrc = args[0];
-                user = args[1];
-                pass = args[2];
-                streamName = args[3];
+            videoSrc = args[0];
+            user = args[1];
+            pass = args[2];
+            streamName = args[3];
+            if(args.length() >= 4){
                 region = args[4];
+                if(args.length() >=5){
+                    fps = Integer.parseInt(args[5]);
+                }
             }
+            
 
             KinesisVideoClient kinesisVideoClient = KinesisVideoJavaClientFactory
                     .createKinesisVideoClient(
                             Regions.fromName(region),
                             new SystemPropertiesCredentialsProvider());
 
-            MediaSource openCVMediaSource = createOpenCVMediaSource(videoSrc,user,pass);
+            MediaSource openCVMediaSource = createOpenCVMediaSource(videoSrc,user,pass,fps);
 
             kinesisVideoClient.registerMediaSource(streamName, openCVMediaSource);
 
@@ -45,11 +50,11 @@ public class OpenCVDemo {
         }
     }
 
-    private static MediaSource createOpenCVMediaSource(String videoSrc,String user,String pass) {
+    private static MediaSource createOpenCVMediaSource(String videoSrc,String user,String pass,int fps) {
 
         MediaSourceConfiguration configuration =
                 new OpenCVMediaSourceConfiguration.Builder()
-                        .fps(5)
+                        .fps(fps)
                         .videoSrc(videoSrc)
                         .user(user)
                         .pass(pass)
