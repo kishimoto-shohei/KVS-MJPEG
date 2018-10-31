@@ -6,10 +6,24 @@
 
     <!-- Output to jar format -->
     <packaging>jar</packaging>
-    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
       <maven.compiler.source>1.7</maven.compiler.source>
       <maven.compiler.target>1.7</maven.compiler.target>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
     <groupId>brainstech</groupId>
@@ -54,19 +68,19 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.11.289</version>
+            <version>1.11.438</version>
         </dependency>
         
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-kinesisvideo</artifactId>
-            <version>1.11.247</version>
+            <version>1.11.438</version>
         </dependency>
         
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>amazon-kinesis-client</artifactId>
-            <version>1.9.0</version>
+            <version>1.9.2</version>
         </dependency>
         
         <dependency>
