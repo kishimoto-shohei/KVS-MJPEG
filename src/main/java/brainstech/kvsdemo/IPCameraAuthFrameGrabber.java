@@ -22,8 +22,7 @@ import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
 
 /**
- * 認証付きIPカメラの画像取得用
- * IPCameraFrameGrabberが認証に対応していないため作成
+ * IPCAM for auth URL
  */
 public class IPCameraAuthFrameGrabber extends FrameGrabber {
 
