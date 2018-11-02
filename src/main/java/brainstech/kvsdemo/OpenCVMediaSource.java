@@ -109,7 +109,7 @@ public class OpenCVMediaSource implements MediaSource {
                         flags,
                         currentTimeMs * HUNDREDS_OF_NANOS_IN_MS,
                         currentTimeMs * HUNDREDS_OF_NANOS_IN_MS,
-                        FRAME_DURATION_20_MS * HUNDREDS_OF_NANOS_IN_MS,
+                        (1000/openCVMediaSourceConfiguration.getFps()) * HUNDREDS_OF_NANOS_IN_MS,
                         data);
 
                 if (frame.getSize() == 0) {
